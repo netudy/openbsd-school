@@ -1,0 +1,48 @@
+#!/bin/sh
+echo This is a vodka-bottle-documentation, sorry, no automation at this time, :-/
+exit 1
+
+##########################################################
+# Prepare doas
+##########################################################
+
+mkdir -p /local`pwd`/RCS
+ln -s /local`pwd`/RCS RCS
+mkdir /etc/doas
+
+ci -t- -u /etc/doas
+# /etc/doas,v  <--  /etc/doas
+
+co -l /etc/doas
+# /etc/doas,v  -->  /etc/doas
+# no revisions present; generating empty revision 0.0
+writable /etc/doas exists; remove it? [ny](n): "y"
+# no revisions, so nothing can be locked
+# co: /etc/doas: Is a directory
+FWA# co -l /etc/doas
+# /etc/doas,v  -->  /etc/doas
+# no revisions present; generating empty revision 0.0
+# writable /etc/doas exists; remove it? [ny](n): "n"
+# co: writable /etc/doas exists; checkout aborted
+
+cat <<"EOF" > /etc/doas.conf
+permit nopass keepenv :wheel
+EOF
+
+ci -t- -m"Enabled doas for wheel users. //$doas_USER" -u /etc/doas
+# /etc/doas,v  <--  /etc/doas
+chmod 440 /etc/doas
+
+##########################################################
+# Deploy sysadmins
+##########################################################
+
+ useradd -m sherzad
+usermod -G wheel sherzad
+chsh -s /usr/local/bin/bash sherzad
+ cat <<"EOF" > /home/sherzad/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCslvvN6rG2Rpj9HOuzXazatToyiwDh/5sr+QtRMkch7lp8rqqOF7o+CzYU3dqKaHsIyspzpiQUTr4fwIEq0T+dhVh6LwuX9nLRcUsNP3m07Nwg8A9O5XALdRmFkVzSutGUtQHXaiPbBvKUB28zJNFfYL2sqNUE934Fwm4Bdob5gZF/uYyp8bV3dHpQryy5vqWUAyK9zAhCG4jd8b6BKT2y1/2KhHKBfxWjDaw51/TOzv0o6tzCUajDpT5K4B1wQ9AMWMUMfgYAsMIogtLTCZUMs64zkZaKxWj0IpuQClLidZSWbBXzTBVl5fKdeVGfJ4+cjm2FcRLMw7aPnFDju/DqkjFUpBkTBl4brOVPYDHBiJBoWWredKIev45RpWIG3SyqhZG+T0OaX7O0V/y2tpl28RouzdHK4tJtIHlQi4wE2J+t/Dr0iIeJ7CB8Qz2B3rZ9cgA1CD7JMZlb170lceiOIxeqeTjJf/2TIsiWEL/zdXnwYinwQfN873FB7U5EjgxTQlVEemBrpJvq4BZNIrATjzeJ1749nmUnzYXbl5JESZZX+QBYISwLSIbYkTPJBUX5ptB7sw7uvHNgFZaU3HwWCOu4JtF1fM4Z3K66kVwPzO9ay3/09t3DEkQqOb5r2/zLVd0/VFJKlEzd/XHX8w6l7mwyzdRMvNJV/fS6Ozy5Tw== sherzad@SherzadPC
+EOF
+chmod 750 /home/sherzad/
+sha256 /home/sherzad/.ssh/authorized_keys
+# SHA256 (/home/sherzad/.ssh/authorized_keys) = e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
