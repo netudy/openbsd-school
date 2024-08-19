@@ -6,276 +6,90 @@ exit 1
 # Installation packages
 ##########################################################
 
-export PKG_PATH=http://ftp.eu.openbsd.org/pub/OpenBSD/7.2/packages/`machine -a`/
+export PKG_PATH=http://ftp.eu.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine -a`/
 
 cat <<"EOF" | while read package; do pkg_add -v $package; done
-bash-5.1.16.tgz
-wget-1.21.3.tgz
-emacs-28.2-no_x11.tgz
+bash-5.2.26.tgz
+wget-1.21.4p0.tgz
+emacs-29.2-no_x11.tgz
 pftop-0.7p19.tgz
-nmap-7.91p2.tgz
+nmap-7.91p5.tgz
 ifstat-1.1p5.tgz
 minicom-2.8.tgz
-picocom-3.1.tg
-conserver-8.2.7.tgz
-screen-4.9.0.tgz
-python-2.7.18p10.tgz
+picocom-3.1.tgz
+conserver-8.2.7p1.tgz
+screen-4.9.1.tgz
+python-3.9.18p0.tgz
 EOF
-# quirks-6.42 signed on 2022-09-29T09:49:28Z
-# quirks-6.42: ok
-# bash-5.1.16:libiconv-1.17: ok
-# bash-5.1.16:gettext-runtime-0.21p1: ok
+# quirks-7.14:updatedb-0p0: ok
+# quirks-7.14 signed on 2024-03-17T12:22:05Z
+# quirks-7.14: ok
+# bash-5.2.26:libiconv-1.17: ok
+# bash-5.2.26:gettext-runtime-0.22.5: ok
 # Shell /usr/local/bin/bash appended to /etc/shells
-# bash-5.1.16: ok
-# Update candidates: quirks-6.42 -> quirks-6.42
-# quirks-6.42 signed on 2022-09-29T09:49:28Z
-# wget-1.21.3:libunistring-0.9.7: ok
-# wget-1.21.3:libidn2-2.3.0p0: ok
-# wget-1.21.3:bzip2-1.0.8p0: ok
-# wget-1.21.3:pcre2-10.37: ok
-# wget-1.21.3:libpsl-0.21.1: ok
-# wget-1.21.3: ok
-# Update candidates: quirks-6.42 -> quirks-6.42
-# quirks-6.42 signed on 2022-09-29T09:49:28Z
-# emacs-28.2-no_x11:gmp-6.2.1p0: ok
-# emacs-28.2-no_x11:jansson-2.14: ok
-# emacs-28.2-no_x11:libnettle-3.8.1: ok
-# emacs-28.2-no_x11:libtasn1-4.19.0: ok
-# emacs-28.2-no_x11:libffi-3.4.2: ok
-# emacs-28.2-no_x11:p11-kit-0.24.1: ok
-# emacs-28.2-no_x11:lz4-1.9.4: ok
-# emacs-28.2-no_x11:xz-5.2.5p2: ok
-# emacs-28.2-no_x11:zstd-1.5.2: ok
-# emacs-28.2-no_x11:libunbound-1.16.3: ok
-# emacs-28.2-no_x11:brotli-1.0.9p0: ok
-# emacs-28.2-no_x11:gnutls-3.7.7: ok
-# emacs-28.2-no_x11:libxml-2.10.2: ok
-# emacs-28.2-no_x11: ok
+# bash-5.2.26: ok
+# Update candidates: quirks-7.14 -> quirks-7.14
+# quirks-7.14 signed on 2024-03-17T12:22:05Z
+# wget-1.21.4p0:libunistring-0.9.7: ok
+# wget-1.21.4p0:libidn2-2.3.0p0: ok
+# wget-1.21.4p0:libpsl-0.21.1: ok
+# wget-1.21.4p0:bzip2-1.0.8p0: ok
+# wget-1.21.4p0:pcre2-10.37p2: ok
+# wget-1.21.4p0: ok
+# Update candidates: quirks-7.14 -> quirks-7.14
+# quirks-7.14 signed on 2024-03-17T12:22:05Z
+# emacs-29.2-no_x11:xz-5.4.5: ok
+# emacs-29.2-no_x11:libxml-2.12.5: ok
+# emacs-29.2-no_x11:tree-sitter-0.20.8p1: ok
+# emacs-29.2-no_x11:gmp-6.3.0: ok
+# emacs-29.2-no_x11:jansson-2.14: ok
+# emacs-29.2-no_x11:libunbound-1.19.1: ok
+# emacs-29.2-no_x11:libnettle-3.9.1: ok
+# emacs-29.2-no_x11:libtasn1-4.19.0: ok
+# emacs-29.2-no_x11:lz4-1.9.4: ok
+# emacs-29.2-no_x11:zstd-1.5.5: ok
+# emacs-29.2-no_x11:libffi-3.4.4p1: ok
+# emacs-29.2-no_x11:p11-kit-0.25.3: ok
+# emacs-29.2-no_x11:brotli-1.0.9p0: ok
+# emacs-29.2-no_x11:gnutls-3.8.3p0: ok
+# emacs-29.2-no_x11:sqlite3-3.44.2: ok
+# emacs-29.2-no_x11: ok
 # Running tags: ok
 # New and changed readme(s):
-#         /usr/local/share/doc/pkg-readmes/emacs
-# Update candidates: quirks-6.42 -> quirks-6.42
-# quirks-6.42 signed on 2022-09-29T09:49:28Z
+#     /usr/local/share/doc/pkg-readmes/emacs
+# Update candidates: quirks-7.14 -> quirks-7.14
+# quirks-7.14 signed on 2024-03-17T12:22:05Z
 # pftop-0.7p19: ok
-# Update candidates: quirks-6.42 -> quirks-6.42
-# quirks-6.42 signed on 2022-09-29T09:49:28Z
-# nmap-7.91p2:pcre-8.44: ok
-# nmap-7.91p2:lua-5.3.6: ok
-# nmap-7.91p2:libssh2-1.10.0p0: ok
-# nmap-7.91p2: ok
-# Update candidates: quirks-6.42 -> quirks-6.42
-# quirks-6.42 signed on 2022-09-29T09:49:28Z
+# Update candidates: quirks-7.14 -> quirks-7.14
+# quirks-7.14 signed on 2024-03-17T12:22:05Z
+# nmap-7.91p5:lua-5.3.6: ok
+# nmap-7.91p5:python-3.10.13p0: ok
+# nmap-7.91p5:libssh2-1.11.0: ok
+# nmap-7.91p5:pcre-8.45: ok
+# nmap-7.91p5: ok
+# Update candidates: quirks-7.14 -> quirks-7.14
+# quirks-7.14 signed on 2024-03-17T12:22:05Z
 # ifstat-1.1p5: ok
-# Update candidates: quirks-6.42 -> quirks-6.42
-# quirks-6.42 signed on 2022-09-29T09:49:28Z
-# minicom-2.8:lrzsz-0.12.20p2: ok
+# Update candidates: quirks-7.14 -> quirks-7.14
+# quirks-7.14 signed on 2024-03-17T12:22:05Z
+# minicom-2.8:lrzsz-0.12.20p3: ok
 # minicom-2.8:kermit-9.0.302p0: ok
 # minicom-2.8: ok
-# Update candidates: quirks-6.42 -> quirks-6.42
-# quirks-6.42 signed on 2022-09-29T09:49:28Z
-# Can't find picocom-3.1.tg
-# Couldn't install picocom-3.1.tg
-# Update candidates: quirks-6.42 -> quirks-6.42
-# quirks-6.42 signed on 2022-09-29T09:49:28Z
-# conserver-8.2.7: ok
+# Update candidates: quirks-7.14 -> quirks-7.14
+# quirks-7.14 signed on 2024-03-17T12:22:05Z
+# picocom-3.1: ok
+# Update candidates: quirks-7.14 -> quirks-7.14
+# quirks-7.14 signed on 2024-03-17T12:22:05Z
+# conserver-8.2.7p1: ok
 # The following new rcscripts were installed: /etc/rc.d/conserver
 # See rcctl(8) for details.
 # New and changed readme(s):
-#         /usr/local/share/doc/pkg-readmes/conserver
-# Update candidates: quirks-6.42 -> quirks-6.42
-# quirks-6.42 signed on 2022-09-29T09:49:28Z
-# screen-4.9.0: ok
-# Update candidates: quirks-6.42 -> quirks-6.42
-# quirks-6.42 signed on 2022-09-29T09:49:28Z
-# python-2.7.18p10:sqlite3-3.39.3: ok
-# python-2.7.18p10: ok
-# --- +python-2.7.18p10 -------------------
-# *** Python 2.7 is end-of-life and no longer receives security updates.
-
-pkg_delete python-2.7.18p10
-# python-2.7.18p10: ok
-# Read shared items: ok
-# --- -python-2.7.18p10 -------------------
-# Don't forget to remove /usr/local/bin/python,
-# /usr/local/bin/2to3, /usr/local/bin/python-config and/or
-# /usr/local/bin/pydoc if they were symlinks to
-# /usr/local/bin/python2.7, /usr/local/bin/python2.7-2to3,
-# /usr/local/bin/python2.7-config or to /usr/local/bin/pydoc2.7.
-
-rm /usr/local/bin/2to3 /usr/bin/python
-
-cat <<"EOF" | while read package; do pkg_add -v $package; done
-python-3.9.14.tgz
-EOF
-# Update candidates: quirks-6.42 -> quirks-6.42
-# quirks-6.42 signed on 2022-09-29T09:49:28Z
-# python-3.9.14: ok
+#     /usr/local/share/doc/pkg-readmes/conserver
+# Update candidates: quirks-7.14 -> quirks-7.14
+# quirks-7.14 signed on 2024-03-17T12:22:05Z
+# screen-4.9.1: ok
+# Update candidates: quirks-7.14 -> quirks-7.14
+# quirks-7.14 signed on 2024-03-17T12:22:05Z
+# python-3.9.18p0: ok
 
 ln -sf /usr/local/bin/python3.9 /usr/bin/python3
-
-##########################################################
-# Install src and ports
-# - "dmesg | grep wd"
-# - verify: "fsck /dev/wd1a"
-##########################################################
-
-# we use external SATA hard drive to store src of the kernel
-fsck /dev/wd1a
-# ** /dev/rwd1a
-# ** Last Mounted on /mnt
-# ** Phase 1 - Check Blocks and Sizes
-# ** Phase 2 - Check Pathnames
-# ** Phase 3 - Check Connectivity
-# ** Phase 4 - Check Reference Counts
-# ** Phase 5 - Check Cyl groups
-# 5 files, 5 used, 514434 free (42 frags, 64299 blocks, 0.0% fragmentation)
-
-MARK FILE SYSTEM CLEAN? [Fyn?] Fyn
-# ***** FILE SYSTEM WAS MODIFIED *****
-
-mount /dev/wd1a /usr/src
-
-cd /usr/src && wget ftp.eu.openbsd.org/pub/OpenBSD/7.2/sys.tar.gz
-cd /usr/src && wget ftp.eu.openbsd.org/pub/OpenBSD/7.2/src.tar.gz
-tar xzf sys.tar.gz
-tar xzf src.tar.gz
-# /usr/src: write failed, file system is full
-
-df
-# Filesystem  512-blocks      Used     Avail Capacity  Mounted on
-# /dev/wd0a      3869276   2526912   1148904    69%    /
-# /dev/wd1a      2057756   2057756   -102884   105%    /usr/src
-
-fdisk -e wd1
-edit 3
-#             Starting         Ending         LBA Info:
-#  #: id      C   H   S -      C   H   S [       start:        size ]
-# -------------------------------------------------------------------------------
-# *3: A6      0   1   2 -  14593  80  63 [          64:   234441584 ] OpenBSD
-Partition id ('0' to disable) [01 - FF]: [A6] (? for help) A6
-Do you wish to edit in CHS mode? [n] n
-Partition offset [0 - 234441647]: [64] 0
-Partition size [1 - 234441584]: [234441584] *
-wd1*: 1> w
-# Writing MBR at offset 0.
-wd1: 1> x
-
-umount -f /dev/wd1a
-newfs wd1a
-# /dev/rwd1a: 114473.5MB in 234441632 sectors of 512 bytes
-# 566 cylinder groups of 202.50MB, 12960 blocks, 25920 inodes each
-# super-block backups (for fsck -b #) at:
-#  160, 414880, 829600, 1244320, 1659040, 2073760, 2488480, 2903200, 3317920,
-#  3732640, 4147360, 4562080, 4976800, 5391520, 5806240, 6220960, 6635680,
-#  7050400, 7465120, 7879840, 8294560, 8709280, 9124000, 9538720, 9953440,
-#  10368160, 10782880, 11197600, 11612320, 12027040, 12441760, 12856480,
-#  13271200, 13685920, 14100640, 14515360, 14930080, 15344800, 15759520,
-#  16174240, 16588960, 17003680, 17418400, 17833120, 18247840, 18662560,
-#  19077280, 19492000, 19906720, 20321440, 20736160, 21150880, 21565600,
-#  21980320, 22395040, 22809760, 23224480, 23639200, 24053920, 24468640,
-#  24883360, 25298080, 25712800, 26127520, 26542240, 26956960, 27371680,
-#  27786400, 28201120, 28615840, 29030560, 29445280, 29860000, 30274720,
-#  30689440, 31104160, 31518880, 31933600, 32348320, 32763040, 33177760,
-#  33592480, 34007200, 34421920, 34836640, 35251360, 35666080, 36080800,
-#  36495520, 36910240, 37324960, 37739680, 38154400, 38569120, 38983840,
-#  39398560, 39813280, 40228000, 40642720, 41057440, 41472160, 41886880,
-#  42301600, 42716320, 43131040, 43545760, 43960480, 44375200, 44789920,
-#  45204640, 45619360, 46034080, 46448800, 46863520, 47278240, 47692960,
-#  48107680, 48522400, 48937120, 49351840, 49766560, 50181280, 50596000,
-#  51010720, 51425440, 51840160, 52254880, 52669600, 53084320, 53499040,
-#  53913760, 54328480, 54743200, 55157920, 55572640, 55987360, 56402080,
-#  56816800, 57231520, 57646240, 58060960, 58475680, 58890400, 59305120,
-#  59719840, 60134560, 60549280, 60964000, 61378720, 61793440, 62208160,
-#  62622880, 63037600, 63452320, 63867040, 64281760, 64696480, 65111200,
-#  65525920, 65940640, 66355360, 66770080, 67184800, 67599520, 68014240,
-#  68428960, 68843680, 69258400, 69673120, 70087840, 70502560, 70917280,
-#  71332000, 71746720, 72161440, 72576160, 72990880, 73405600, 73820320,
-#  74235040, 74649760, 75064480, 75479200, 75893920, 76308640, 76723360,
-#  77138080, 77552800, 77967520, 78382240, 78796960, 79211680, 79626400,
-#  80041120, 80455840, 80870560, 81285280, 81700000, 82114720, 82529440,
-#  82944160, 83358880, 83773600, 84188320, 84603040, 85017760, 85432480,
-#  85847200, 86261920, 86676640, 87091360, 87506080, 87920800, 88335520,
-#  88750240, 89164960, 89579680, 89994400, 90409120, 90823840, 91238560,
-#  91653280, 92068000, 92482720, 92897440, 93312160, 93726880, 94141600,
-#  94556320, 94971040, 95385760, 95800480, 96215200, 96629920, 97044640,
-#  97459360, 97874080, 98288800, 98703520, 99118240, 99532960, 99947680,
-#  100362400, 100777120, 101191840, 101606560, 102021280, 102436000, 102850720,
-#  103265440, 103680160, 104094880, 104509600, 104924320, 105339040, 105753760,
-#  106168480, 106583200, 106997920, 107412640, 107827360, 108242080, 108656800,
-#  109071520, 109486240, 109900960, 110315680, 110730400, 111145120, 111559840,
-#  111974560, 112389280, 112804000, 113218720, 113633440, 114048160, 114462880,
-#  114877600, 115292320, 115707040, 116121760, 116536480, 116951200, 117365920,
-#  117780640, 118195360, 118610080, 119024800, 119439520, 119854240, 120268960,
-#  120683680, 121098400, 121513120, 121927840, 122342560, 122757280, 123172000,
-#  123586720, 124001440, 124416160, 124830880, 125245600, 125660320, 126075040,
-#  126489760, 126904480, 127319200, 127733920, 128148640, 128563360, 128978080,
-#  129392800, 129807520, 130222240, 130636960, 131051680, 131466400, 131881120,
-#  132295840, 132710560, 133125280, 133540000, 133954720, 134369440, 134784160,
-#  135198880, 135613600, 136028320, 136443040, 136857760, 137272480, 137687200,
-#  138101920, 138516640, 138931360, 139346080, 139760800, 140175520, 140590240,
-#  141004960, 141419680, 141834400, 142249120, 142663840, 143078560, 143493280,
-#  143908000, 144322720, 144737440, 145152160, 145566880, 145981600, 146396320,
-#  146811040, 147225760, 147640480, 148055200, 148469920, 148884640, 149299360,
-#  149714080, 150128800, 150543520, 150958240, 151372960, 151787680, 152202400,
-#  152617120, 153031840, 153446560, 153861280, 154276000, 154690720, 155105440,
-#  155520160, 155934880, 156349600, 156764320, 157179040, 157593760, 158008480,
-#  158423200, 158837920, 159252640, 159667360, 160082080, 160496800, 160911520,
-#  161326240, 161740960, 162155680, 162570400, 162985120, 163399840, 163814560,
-#  164229280, 164644000, 165058720, 165473440, 165888160, 166302880, 166717600,
-#  167132320, 167547040, 167961760, 168376480, 168791200, 169205920, 169620640,
-#  170035360, 170450080, 170864800, 171279520, 171694240, 172108960, 172523680,
-#  172938400, 173353120, 173767840, 174182560, 174597280, 175012000, 175426720,
-#  175841440, 176256160, 176670880, 177085600, 177500320, 177915040, 178329760,
-#  178744480, 179159200, 179573920, 179988640, 180403360, 180818080, 181232800,
-#  181647520, 182062240, 182476960, 182891680, 183306400, 183721120, 184135840,
-#  184550560, 184965280, 185380000, 185794720, 186209440, 186624160, 187038880,
-#  187453600, 187868320, 188283040, 188697760, 189112480, 189527200, 189941920,
-#  190356640, 190771360, 191186080, 191600800, 192015520, 192430240, 192844960,
-#  193259680, 193674400, 194089120, 194503840, 194918560, 195333280, 195748000,
-#  196162720, 196577440, 196992160, 197406880, 197821600, 198236320, 198651040,
-#  199065760, 199480480, 199895200, 200309920, 200724640, 201139360, 201554080,
-#  201968800, 202383520, 202798240, 203212960, 203627680, 204042400, 204457120,
-#  204871840, 205286560, 205701280, 206116000, 206530720, 206945440, 207360160,
-#  207774880, 208189600, 208604320, 209019040, 209433760, 209848480, 210263200,
-#  210677920, 211092640, 211507360, 211922080, 212336800, 212751520, 213166240,
-#  213580960, 213995680, 214410400, 214825120, 215239840, 215654560, 216069280,
-#  216484000, 216898720, 217313440, 217728160, 218142880, 218557600, 218972320,
-#  219387040, 219801760, 220216480, 220631200, 221045920, 221460640, 221875360,
-#  222290080, 222704800, 223119520, 223534240, 223948960, 224363680, 224778400,
-#  225193120, 225607840, 226022560, 226437280, 226852000, 227266720, 227681440,
-#  228096160, 228510880, 228925600, 229340320, 229755040, 230169760, 230584480,
-#  230999200, 231413920, 231828640, 232243360, 232658080, 233072800, 233487520,
-#  233902240, 234316960,
-mount /dev/wd1a /usr/src
-df
-# Filesystem  512-blocks      Used     Avail Capacity  Mounted on
-# /dev/wd0a      3869276   2526912   1148904    69%    /
-# /dev/wd1a    227069868         4 215716372     0%    /usr/src
-
-cd /usr/src && wget ftp.eu.openbsd.org/pub/OpenBSD/7.2/sys.tar.gz
-# --2022-10-27 22:39:59--  http://ftp.eu.openbsd.org/pub/OpenBSD/7.2/sys.tar.gz
-# Resolving ftp.eu.openbsd.org (ftp.eu.openbsd.org)... 212.162.147.220, 2a09:d400:0:1::94
-# Connecting to ftp.eu.openbsd.org (ftp.eu.openbsd.org)|212.162.147.220|:80... connected.
-# HTTP request sent, awaiting response... 200 OK
-# Length: 46561356 (44M) [text/plain]
-# Saving to: 'sys.tar.gz'
-
-# sys.tar.gz          100%[===================>]  44.40M  3.83MB/s    in 11s
-
-# 2022-10-27 22:40:10 (4.14 MB/s) - 'sys.tar.gz' saved [46561356/46561356]
-
-cd /usr/src && wget ftp.eu.openbsd.org/pub/OpenBSD/7.2/src.tar.gz
-# --2022-10-27 22:40:20--  http://ftp.eu.openbsd.org/pub/OpenBSD/7.2/src.tar.gz
-# Resolving ftp.eu.openbsd.org (ftp.eu.openbsd.org)... 212.162.147.220, 2a09:d400:0:1::94
-# Connecting to ftp.eu.openbsd.org (ftp.eu.openbsd.org)|212.162.147.220|:80... connected.
-# HTTP request sent, awaiting response... 200 OK
-# Length: 200775910 (191M) [text/plain]
-# Saving to: 'src.tar.gz'
-
-# src.tar.gz          100%[===================>] 191.47M  4.14MB/s    in 51s
-
-# 2022-10-27 22:41:11 (3.78 MB/s) - 'src.tar.gz' saved [200775910/200775910]
-
-tar xzf sys.tar.gz
-tar xzf src.tar.gz
-
