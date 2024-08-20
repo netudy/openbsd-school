@@ -6,43 +6,61 @@ exit 1
 # Prepare doas
 ##########################################################
 
-mkdir -p /local`pwd`/RCS
-ln -s /local`pwd`/RCS RCS
-mkdir /etc/doas
+# Create the RCS directory for version control, using pwd to ensure the correct path
+mkdir -p `pwd`/RCS
+ln -s `pwd`/RCS /etc/doas,RCS
 
+# Create the /etc/doas directory
+mkdir -p /etc/doas
+
+# Initialize the /etc/doas file under version control
 ci -t- -u /etc/doas
 # /etc/doas,v  <--  /etc/doas
+# initial revision: 1.1
+# done
 
+# Check out the /etc/doas file for editing
 co -l /etc/doas
 # /etc/doas,v  -->  /etc/doas
-# no revisions present; generating empty revision 0.0
-writable /etc/doas exists; remove it? [ny](n): "y"
-# no revisions, so nothing can be locked
-# co: /etc/doas: Is a directory
-co -l /etc/doas
-# /etc/doas,v  -->  /etc/doas
-# no revisions present; generating empty revision 0.0
-writable /etc/doas exists; remove it? [ny](n): "n"
-# co: writable /etc/doas exists; checkout aborted
+# revision 1.1 (locked)
+# done
 
+# Create the doas.conf configuration file
 cat <<"EOF" > /etc/doas.conf
 permit nopass keepenv :wheel
 EOF
 
-ci -t- -m"Enabled doas for wheel users. //$doas_USER" -u /etc/doas
+# Check in the /etc/doas file with the appropriate message
+ci -t- -m"Enabled doas for wheel users." -u /etc/doas
 # /etc/doas,v  <--  /etc/doas
+# new revision: 1.2; previous revision: 1.1
+# done
+
+# Set the correct permissions for /etc/doas
 chmod 440 /etc/doas
 
 ##########################################################
 # Deploy sysadmins
 ##########################################################
 
+# Create the user 'fa1c0n'
 useradd -m fa1c0n
+
+# Add 'fa1c0n' to the 'wheel' group
 usermod -G wheel fa1c0n
+
+# Set the shell for 'fa1c0n' to bash
 chsh -s /usr/local/bin/bash fa1c0n
+
+# Create the authorized_keys file for SSH
 cat <<"EOF" > /home/fa1c0n/.ssh/authorized_keys
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcMkYWwQRIjAah8w5/OScbjN7OwKaqomjTFhxB+1CzUnbpMvRey6ONjWmRuo6VgUOjoenKyPFeI6+205dhK0chPHqC3qZvkq8T9epT0KKRuxFRohWKD2TFpH9UFkyHVV6e6IxnnZpwnmLfIBe6VNSWNkewid7AzyvxhE2NgpufT03eqbHdRjrVoMtKtNZC9Upv/w17R253/VWVLdzzGjU4IHEHCPf4U5HDyjpXH1qTHm3ZFhYO9jGIca85rRgsIldVaJ8zJb++Fbhk7hDtzUIO+lqFsOEUwVzl4HKuQePB/vuw1yDqoQZsfwp5w56d3TPqzjzsTArfRuLdL3Q1VTcX fa1c0n@fa1c0ns-MBP.lan
 EOF
+
+# Set the correct permissions for the user's home directory and SSH keys
 chmod 750 /home/fa1c0n/
+chmod 600 /home/fa1c0n/.ssh/authorized_keys
+
+# Verify the SHA256 checksum of the authorized_keys file
 sha256 /home/fa1c0n/.ssh/authorized_keys
-# SHA256 (/home/fa1c0n/.ssh/authorized_keys) = f86ff5865948de1d354f1a3ed0023cdc246a8e6231043fd95cce84b4e1e7b08b
+# SHA256 (/home/fa1c0n/.ssh/authorized_keys) = ce1202a982f461cd2eddf39d9c1280a1712643461a0fc6f6f2d3294feb9d3654

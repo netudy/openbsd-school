@@ -6,16 +6,64 @@ exit 1
 # Secure SSH
 ##########################################################
 
-cat <<"EOF" > /etc/ssh/sshd_config
-Port 10222
-PermitRootLogin no
-PubkeyAuthentication yes
-AuthorizedKeysFile  .ssh/authorized_keys
-PasswordAuthentication no
-Subsystem   sftp    /usr/libexec/sftp-server
+# Change to the SSH configuration directory
+cd /etc/ssh/
+
+# Create the RCS directory for version control, ensuring correct permissions and path
+mkdir -pm700 `pwd`/RCS
+ln -s `pwd`/RCS /etc/ssh/RCS
+
+# Initialize the sshd_config file under version control
+ci -t- -u /etc/ssh/sshd_config
+# /etc/ssh/sshd_config,v  <--  /etc/ssh/sshd_config
+# initial revision: 1.1
+# done
+
+# Check out the sshd_config file for editing
+co -l /etc/ssh/sshd_config
+# /etc/ssh/sshd_config,v  -->  /etc/ssh/sshd_config
+# revision 1.1 (locked)
+# done
+
+# Apply the patch to secure SSH
+cat <<EOF | patch -p0
+===================================================================
+RCS file: /etc/ssh/RCS/sshd_config,v
+retrieving revision 1.1
+diff -u -r1.1 /etc/ssh/sshd_config
+--- /etc/ssh/sshd_config        2021/07/02 05:11:21     1.1
++++ /etc/ssh/sshd_config        2024/08/20 01:51:13
+@@ -1,4 +1,4 @@
+-#      $OpenBSD: sshd_config,v 1.104 2021/07/02 05:11:21 dtucker Exp $
++#      $OpenBSD: sshd_config,v 1.104 2021/07/02 05:11:21 dtucker Exp $
+
+ # This is the sshd server system-wide configuration file.  See
+ # sshd_config(5) for more information.
+@@ -35,7 +35,7 @@
+ # Authentication:
+
+ #LoginGraceTime 2m
+-PermitRootLogin yes
++PermitRootLogin no
+ #StrictModes yes
+ #MaxAuthTries 6
+ #MaxSessions 10
+@@ -63,7 +63,7 @@
+ #IgnoreRhosts yes
+
+ # To disable tunneled clear text passwords, change to no here!
+-#PasswordAuthentication yes
++PasswordAuthentication no
+ #PermitEmptyPasswords no
+
+ # Change to no to disable s/key passwords
 EOF
 
-kill -HUP `cat /var/run/sshd.pid`
+# Check in the sshd_config file with the appropriate message
+ci -t- -m"Securing SSH" -u /etc/ssh/sshd_config
+# /etc/ssh/sshd_config,v  <--  /etc/ssh/sshd_config
+# new revision: 1.2; previous revision: 1.1
+# done
 
-# - open new terminal tab
-ssh -p 10222 fa1c0n@10.49.90.21
+# Reload SSH service to apply changes
+kill -HUP `cat /var/run/sshd.pid`
