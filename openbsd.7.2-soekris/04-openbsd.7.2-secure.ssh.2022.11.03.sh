@@ -67,3 +67,16 @@ ci -t- -m"Securing SSH" -u /etc/ssh/sshd_config
 
 # Reload SSH service to apply changes
 kill -HUP `cat /var/run/sshd.pid`
+
+ssh fa1c0n@10.49.90.129
+# OpenBSD 7.2 (GENERIC) #728: Tue Sep 27 11:49:18 MDT 2022
+
+# Welcome to OpenBSD: The proactively secure Unix-like operating system.
+
+# Please use the sendbug(1) utility to report bugs in the system.
+# Before reporting a bug, please try to reproduce it with the latest
+# version of the code.  With bug reports, please try to ensure that
+# enough information to reproduce the problem is enclosed, and if a
+# known fix for it exists, include that as well.
+
+# -bash-5.1$
