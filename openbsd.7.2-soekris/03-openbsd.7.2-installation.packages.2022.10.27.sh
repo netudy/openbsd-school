@@ -16,7 +16,7 @@ pftop-0.7p19.tgz
 nmap-7.91p2.tgz
 ifstat-1.1p5.tgz
 minicom-2.8.tgz
-picocom-3.1.tg
+picocom-3.1.tgz
 conserver-8.2.7.tgz
 screen-4.9.0.tgz
 python-3.9.14.tgz
