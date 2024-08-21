@@ -27,4 +27,3 @@ EOF
 chmod +x /home/fa1c0n/startup_config.sh
 crontab -e
 @reboot /home/fa1c0n/startup_config.sh
-

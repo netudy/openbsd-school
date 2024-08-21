@@ -519,4 +519,3 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 # Warning: Permanently added '192.168.2.2' (ED25519) to the list of known hosts.
 root@192.168.2.2 password: f4U0+b*GlStu9I1AwR1@
 # Connection reset by 192.168.2.2 port 22
-

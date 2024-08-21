@@ -196,4 +196,3 @@ sh /etc/net-route.sh carp-up
 sh /etc/net-route.sh carp-backup
 
 # - TODO: DHCPD on vr1/carp1 + dhcrelay
-

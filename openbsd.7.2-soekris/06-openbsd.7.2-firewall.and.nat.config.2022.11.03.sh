@@ -27,4 +27,3 @@ dhcp
 EOF
 
 sh /etc/netstart
-
