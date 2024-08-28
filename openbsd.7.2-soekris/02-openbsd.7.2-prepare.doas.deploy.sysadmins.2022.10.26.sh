@@ -8,36 +8,36 @@ exit 1
 
 # Create the RCS directory for version control, using pwd to ensure the correct path
 mkdir -p `pwd`/RCS
-ln -s `pwd`/RCS /etc/doas,RCS
+ln -s `pwd`/RCS /etc/RCS
 
-# Create the /etc/doas directory
-mkdir -p /etc/doas
+# Create an empty /etc/doas.conf file
+touch /etc/doas.conf
 
-# Initialize the /etc/doas file under version control
-ci -t- -u /etc/doas
-# /etc/doas,v  <--  /etc/doas
+# Initialize the /etc/doas.conf file under version control
+ci -t- -u /etc/doas.conf
+# /etc/RCS/doas.conf,v  <--  /etc/doas.conf
 # initial revision: 1.1
 # done
 
-# Check out the /etc/doas file for editing
-co -l /etc/doas
-# /etc/doas,v  -->  /etc/doas
+# Check out the /etc/doas.conf file for editing
+co -l /etc/doas.conf
+# /etc/RCS/doas.conf,v  -->  /etc/doas.conf
 # revision 1.1 (locked)
 # done
 
-# Create the doas.conf configuration file
+# Edit the doas.conf configuration file
 cat <<"EOF" > /etc/doas.conf
 permit nopass keepenv :wheel
 EOF
 
 # Check in the /etc/doas file with the appropriate message
-ci -t- -m"Enabled doas for wheel users." -u /etc/doas
-# /etc/doas,v  <--  /etc/doas
-# new revision: 1.2; previous revision: 1.1
+ci -t- -m"Enabled doas for wheel users." -u /etc/doas.conf
+# /etc/RCS/doas.conf,v  <--  /etc/doas.conf
+# revision 1.2 (unlocked)
 # done
 
-# Set the correct permissions for /etc/doas
-chmod 440 /etc/doas
+# Set the correct permissions for /etc/doas.conf
+chmod 440 /etc/doas.conf
 
 ##########################################################
 # Deploy sysadmins
