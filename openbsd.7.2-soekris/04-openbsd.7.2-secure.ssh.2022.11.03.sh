@@ -3,80 +3,78 @@ echo This is a vodka-bottle-documentation, sorry, no automation at this time, :-
 exit 1
 
 ##########################################################
-# Secure SSH
+# Prepare doas
 ##########################################################
 
-# Change to the SSH configuration directory
-cd /etc/ssh/
+# Create the RCS directory for version control, using pwd to ensure the correct path
+mkdir -p `pwd`/RCS
+ln -s `pwd`/RCS /etc/doas,RCS
 
-# Create the RCS directory for version control, ensuring correct permissions and path
-mkdir -pm700 `pwd`/RCS
-ln -s `pwd`/RCS /etc/ssh/RCS
+# Create the /etc/doas directory
+mkdir -p /etc/doas
 
-# Initialize the sshd_config file under version control
-ci -t- -u /etc/ssh/sshd_config
-# /etc/ssh/sshd_config,v  <--  /etc/ssh/sshd_config
+# Initialize the /etc/doas file under version control
+ci -t- -u /etc/doas
+# /etc/doas,v  <--  /etc/doas
 # initial revision: 1.1
 # done
 
-# Check out the sshd_config file for editing
-co -l /etc/ssh/sshd_config
-# /etc/ssh/sshd_config,v  -->  /etc/ssh/sshd_config
+# Check out the /etc/doas file for editing
+co -l /etc/doas
+# /etc/doas,v  -->  /etc/doas
 # revision 1.1 (locked)
 # done
 
-# Apply the patch to secure SSH
-cat <<EOF | patch -p0
-===================================================================
-RCS file: /etc/ssh/RCS/sshd_config,v
-retrieving revision 1.1
-diff -u -r1.1 /etc/ssh/sshd_config
---- /etc/ssh/sshd_config        2021/07/02 05:11:21     1.1
-+++ /etc/ssh/sshd_config        2024/08/20 01:51:13
-@@ -1,4 +1,4 @@
--#      $OpenBSD: sshd_config,v 1.104 2021/07/02 05:11:21 dtucker Exp $
-+#      $OpenBSD: sshd_config,v 1.104 2021/07/02 05:11:21 dtucker Exp $
-
- # This is the sshd server system-wide configuration file.  See
- # sshd_config(5) for more information.
-@@ -35,7 +35,7 @@
- # Authentication:
-
- #LoginGraceTime 2m
--PermitRootLogin yes
-+PermitRootLogin no
- #StrictModes yes
- #MaxAuthTries 6
- #MaxSessions 10
-@@ -63,7 +63,7 @@
- #IgnoreRhosts yes
-
- # To disable tunneled clear text passwords, change to no here!
--#PasswordAuthentication yes
-+PasswordAuthentication no
- #PermitEmptyPasswords no
-
- # Change to no to disable s/key passwords
+# Create the doas.conf configuration file
+cat <<"EOF" > /etc/doas.conf
+permit nopass keepenv :wheel
 EOF
 
-# Check in the sshd_config file with the appropriate message
-ci -t- -m"Securing SSH" -u /etc/ssh/sshd_config
-# /etc/ssh/sshd_config,v  <--  /etc/ssh/sshd_config
+# Check in the /etc/doas file with the appropriate message
+ci -t- -m"Enabled doas for wheel users." -u /etc/doas
+# /etc/doas,v  <--  /etc/doas
 # new revision: 1.2; previous revision: 1.1
 # done
 
-# Reload SSH service to apply changes
-kill -HUP `cat /var/run/sshd.pid`
+# Set the correct permissions for /etc/doas
+chmod 440 /etc/doas
 
-ssh fa1c0n@10.49.90.129
-# OpenBSD 7.2 (GENERIC) #728: Tue Sep 27 11:49:18 MDT 2022
+##########################################################
+# Deploy sysadmins
+##########################################################
 
-# Welcome to OpenBSD: The proactively secure Unix-like operating system.
+# Create the user 'fa1c0n'
+useradd -m fa1c0n
 
-# Please use the sendbug(1) utility to report bugs in the system.
-# Before reporting a bug, please try to reproduce it with the latest
-# version of the code.  With bug reports, please try to ensure that
-# enough information to reproduce the problem is enclosed, and if a
-# known fix for it exists, include that as well.
+# Add 'fa1c0n' to the 'wheel' group
+usermod -G wheel fa1c0n
 
-# -bash-5.1$
+# Set the shell for 'fa1c0n' to bash
+chsh -s /usr/local/bin/bash fa1c0n
+
+# Create the authorized_keys file for SSH
+cat <<"EOF" > /home/fa1c0n/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcMkYWwQRIjAah8w5/OScbjN7OwKaqomjTFhxB+1CzUnbpMvRey6ONjWmRuo6VgUOjoenKyPFeI6+205dhK0chPHqC3qZvkq8T9epT0KKRuxFRohWKD2TFpH9UFkyHVV6e6IxnnZpwnmLfIBe6VNSWNkewid7AzyvxhE2NgpufT03eqbHdRjrVoMtKtNZC9Upv/w17R253/VWVLdzzGjU4IHEHCPf4U5HDyjpXH1qTHm3ZFhYO9jGIca85rRgsIldVaJ8zJb++Fbhk7hDtzUIO+lqFsOEUwVzl4HKuQePB/vuw1yDqoQZsfwp5w56d3TPqzjzsTArfRuLdL3Q1VTcX fa1c0n@fa1c0ns-MBP.lan
+EOF
+
+# Create ssh config (only for linux/windows environments, OSX won't need)
+cat <<"EOF" > /home/fa1c0n/.ssh/config
+# GitHub
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/fa1c0n.wsl
+
+# OpenBSD
+Host 10.49.90.129
+  HostName 10.49.90.129
+  IdentityFile ~/.ssh/fa1c0n.wsl
+EOF
+
+# Set the correct permissions for the user's home directory and SSH keys
+chmod 750 /home/fa1c0n/
+chmod 600 /home/fa1c0n/.ssh/authorized_keys
+
+# Verify the SHA256 checksum of the authorized_keys file
+sha256 /home/fa1c0n/.ssh/authorized_keys
+# SHA256 (/home/fa1c0n/.ssh/authorized_keys) = f86ff5865948de1d354f1a3ed0023cdc246a8e6231043fd95cce84b4e1e7b08b
