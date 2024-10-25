@@ -6,8 +6,10 @@ exit 1
 # Installation packages
 ##########################################################
 
+# Set PKG_PATH to point to the appropriate OpenBSD package repository based on system version and architecture.
 export PKG_PATH=http://ftp.eu.openbsd.org/pub/OpenBSD/`uname -r`/packages/`machine -a`/
 
+# Install a list of specified packages using pkg_add (-v for verbose output)
 cat <<"EOF" | while read package; do pkg_add -v $package; done
 bash-5.1.16.tgz
 wget-1.21.3.tgz
@@ -22,4 +24,5 @@ screen-4.9.0.tgz
 python-3.9.14.tgz
 EOF
 
+# Create a symbolic link to make Python 3.9 accessible as `python3` system-wide
 ln -sf /usr/local/bin/python3.9 /usr/bin/python3
