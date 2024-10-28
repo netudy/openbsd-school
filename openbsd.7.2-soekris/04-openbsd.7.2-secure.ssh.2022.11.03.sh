@@ -82,7 +82,7 @@ kill -HUP $(cat /var/run/sshd.pid)
 
 # SSH from host machine using new user
 ssh fa1c0n@10.0.0.14
-OpenBSD 7.2 (GENERIC) #728: Tue Sep 27 11:49:18 MDT 2022
+# OpenBSD 7.2 (GENERIC) #728: Tue Sep 27 11:49:18 MDT 2022
 
 # Welcome to OpenBSD: The proactively secure Unix-like operating system.
 
